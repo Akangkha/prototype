@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Customisation from "@/components/Customisation";
+import Customisation from "@/app/components/Customisation";
 import Modal from "@mui/material/Modal";
 
 export default function Home() {
