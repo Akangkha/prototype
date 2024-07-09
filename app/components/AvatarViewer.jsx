@@ -39,7 +39,7 @@ const SplineViewer = () => {
   return (
     <section className="w-fit flex justify-center items-center flex-col">
       <div
-       
+        ref={viewerRef}
         style={{
           width: "300px",
           height: "400px",
@@ -49,7 +49,7 @@ const SplineViewer = () => {
         className="flex justify-center items-center m-4"
       >
         <Spline scene="https://prod.spline.design/XrfB51whJVe0Ydrg/scene.splinecode" />
-        
+
         {/* <iframe
           // src="https://my.spline.design/roomgirlworkingcopy-14671f04f3a833fb464a00b429ac22f9/"
           src="https://my.spline.design/molang3dcopy-1f21cc12185aa5e0517e4cd0dea3a971/"
