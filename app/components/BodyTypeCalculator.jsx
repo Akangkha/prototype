@@ -2,6 +2,7 @@
 import { useState } from "react";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import Image from "next/image";
+import { sendMeasurements } from "@/api/recommendation";
 const BodyTypeCalculator = ({ onNext }) => {
   const [bust, setBust] = useState("");
   const [waist, setWaist] = useState("");
@@ -9,11 +10,13 @@ const BodyTypeCalculator = ({ onNext }) => {
   const [hips, setHips] = useState("");
   const [unit, setUnit] = useState("inches");
 
+  const [bodyType, setBodyType] = useState("");
+  const [upperWearSize, setUpperWearSize] = useState("");
+  const [bottomWearSize, setBottomWearSize] = useState("");
+
   const handleNext = () => {
     onNext();
   };
-
-  const [bodyType, setBodyType] = useState("");
 
   const convertToInches = (value) => (unit === "cm" ? value / 2.54 : value);
 
@@ -23,47 +26,94 @@ const BodyTypeCalculator = ({ onNext }) => {
     const highHipNum = convertToInches(parseFloat(highHip));
     const hipsNum = convertToInches(parseFloat(hips));
 
+    let calculatedBodyType = "";
     if (
       (bustNum - hipsNum <= 1 &&
         hipsNum - bustNum < 3.6 &&
         bustNum - waistNum >= 9) ||
       hipsNum - waistNum >= 10
     ) {
-      setBodyType("Hourglass");
+      calculatedBodyType = "Hourglass";
     } else if (
       hipsNum - bustNum >= 3.6 &&
       hipsNum - bustNum < 10 &&
       hipsNum - waistNum >= 9 &&
       highHipNum / waistNum < 1.193
     ) {
-      setBodyType("Bottom Hourglass");
+      calculatedBodyType = "Bottom Hourglass";
     } else if (
       bustNum - hipsNum > 1 &&
       bustNum - hipsNum < 10 &&
       bustNum - waistNum >= 9
     ) {
-      setBodyType("Top Hourglass");
+      calculatedBodyType = "Top Hourglass";
     } else if (
       hipsNum - bustNum > 2 &&
       hipsNum - waistNum >= 7 &&
       highHipNum / waistNum >= 1.193
     ) {
-      setBodyType("Spoon");
+      calculatedBodyType = "Spoon";
     } else if (hipsNum - bustNum >= 3.6 && hipsNum - waistNum < 9) {
-      setBodyType("Triangle");
+      calculatedBodyType = "Triangle";
     } else if (bustNum - hipsNum >= 3.6 && bustNum - waistNum < 9) {
-      setBodyType("Inverted Triangle");
+      calculatedBodyType = "Inverted Triangle";
     } else if (
       hipsNum - bustNum < 3.6 &&
       bustNum - hipsNum < 3.6 &&
       bustNum - waistNum < 9 &&
       hipsNum - waistNum < 10
     ) {
-      setBodyType("Rectangle");
+      calculatedBodyType = "Rectangle";
     } else {
-      setBodyType("Undefined");
+      calculatedBodyType = "Undefined";
     }
+    setBodyType(calculatedBodyType);
+
+    const upperWearSize = getUpperWearSize(bustNum);
+    const bottomWearSize = getBottomWearSize(waistNum, hipsNum);
+
+    setUpperWearSize(upperWearSize);
+    setBottomWearSize(bottomWearSize);
+
+     const measurements = {
+      bust: bustNum,
+      waist: waistNum,
+      highHip: highHipNum,
+      hips: hipsNum,
+      bodyType: calculatedBodyType,
+      upperWearSize: upperWearSize,
+      bottomWearSize: bottomWearSize,
+    };
+
+    sendMeasurements(measurements);
   };
+
+  const calculateClothingSize = (bustNum, waistNum, hipsNum) => {
+    const upperWearSize = getUpperWearSize(bustNum);
+    const bottomWearSize = getBottomWearSize(waistNum, hipsNum);
+
+    setUpperWearSize(upperWearSize);
+    setBottomWearSize(bottomWearSize);
+  };
+
+  const getUpperWearSize = (bust) => {
+    if (bust <= 32) return "XS";
+    if (bust <= 34) return "S";
+    if (bust <= 36) return "M";
+    if (bust <= 38) return "L";
+    if (bust <= 40) return "XL";
+    return "XXL";
+  };
+
+  const getBottomWearSize = (waist, hips) => {
+    if (waist <= 26 && hips <= 36) return "XS";
+    if (waist <= 28 && hips <= 38) return "S";
+    if (waist <= 30 && hips <= 40) return "M";
+    if (waist <= 32 && hips <= 42) return "L";
+    if (waist <= 34 && hips <= 44) return "XL";
+    return "XXL";
+  };
+
   return (
     <div className="flex justify-between p-8 items-center relative h-full">
       <div className="max-w-md rounded-xl space-y-4">
@@ -134,7 +184,9 @@ const BodyTypeCalculator = ({ onNext }) => {
         </button>
         {bodyType && (
           <div className="mt-4">
-            <p className="text-lg font-bold">Your body type is: {bodyType}</p>
+            <p className="font-bold">Your body type is: {bodyType}</p>
+            <p className="font-bold">Upper wear size: {upperWearSize}</p>
+            <p className="font-bold">Bottom wear size: {bottomWearSize}</p>
           </div>
         )}
       </div>
