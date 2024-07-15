@@ -8,7 +8,7 @@ const page = () => {
      
       <App />
       <Store />
-       <SplineViewer/>
+       {/* <SplineViewer/> */}
     </div>
   );
 };

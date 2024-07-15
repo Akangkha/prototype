@@ -46,9 +46,9 @@ const SplineViewer = () => {
           borderRadius: "8px",
           overflow: "hidden",
         }}
-        className="flex justify-center items-center m-4"
+        className="flex justify-center items-center m-1"
       >
-        <Spline scene="https://prod.spline.design/XrfB51whJVe0Ydrg/scene.splinecode" />
+        <Spline scene="https://prod.spline.design/Nr2-x7FL9QG8rhz8/scene.splinecode" />
 
         {/* <iframe
           // src="https://my.spline.design/roomgirlworkingcopy-14671f04f3a833fb464a00b429ac22f9/"
@@ -58,9 +58,9 @@ const SplineViewer = () => {
           height="100%"
         ></iframe> */}
       </div>
-      <p className="w-full text-center font-bold my-2 ">
+      {/* <p className="w-full text-center font-bold my-2 ">
         Your personalised avatar
-      </p>
+      </p> */}
     </section>
   );
 };
