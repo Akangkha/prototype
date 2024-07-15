@@ -42,7 +42,7 @@ const Store = () => {
     },
     {
       _id: "3",
-      name: "Stylish Shirt",
+      name: "Formal Shirt",
       raw_price: "$30",
       current_price: "$25",
       currency: "USD",
@@ -124,7 +124,7 @@ const Store = () => {
 
   return (
     <div className="w-full relative h-[92vh] p-4">
-      <h1 className="font-semibold text-2xl px-5 mb-5">Choose an outfit</h1>
+      <h1 className="font-semibold text-2xl px-5 mb-5">Make your Own Outfit</h1>
       <ul className="w-full flex flex-wrap gap-4 h-[75%] overflow-y-auto px-5">
         {items1.length > 0 ? (
           items1.map((item) => (
