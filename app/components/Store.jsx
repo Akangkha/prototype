@@ -12,8 +12,19 @@ const Store = () => {
     totalItems: 0,
     totalPages: 0,
   });
+  const img = [
+    "https://images-cdn.ubuy.co.in/6539a3bfd5f7ea4c112b3d79-j-ver-men-39-s-dress-shirts-solid-long.jpg",
+    "https://m.media-amazon.com/images/I/71slaXZxIlL._AC_UY1100_.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTZWH-wdf4Cuic2WVpv4HKNl_-PfUbvUYsk7g&s",
+    "https://i.pinimg.com/originals/f5/89/b7/f589b7f7e4c8d135b437b0477882b017.jpg",
+    "https://m.media-amazon.com/images/I/61LYRZ-uH6L._AC_UY1100_.jpg",
+    "https://5.imimg.com/data5/IW/PT/MY-42453132/ladies-formal-shirts.jpg",
+    "https://5.imimg.com/data5/SELLER/Default/2022/7/RI/RI/RK/87068913/ladies-formal-shirts-500x500.jpg",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQtSxhDJuEx_dakE0wEjM3ri_mLT--TTDK2CA&s",
+    "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-B0mU0MFSmUgPGjYaI83yrsZtL1Z7LzZ6bA&s",
+    "https://sslimages.shoppersstop.com/sys-master/images/h28/h4b/15189728854046/206240981_BLACK.jpg_230Wx334H",
+  ];
 
-  // Fetch data from the API
   const fetchItems = async (page = 1, limit = 10) => {
     try {
       const response = await fetch(`/api/store?page=${page}&limit=${limit}`);
@@ -42,15 +53,16 @@ const Store = () => {
   return (
     <div className="w-full relative h-[92vh] p-4">
       <h1 className="font-semibold text-2xl px-5 mb-5">Choose an outfit</h1>
+      <input type="text" placeholder="Search for items"  value="shirt" className="w-[70%] p-2 rounded-lg border border-gray-300" />
       <ul className="w-full flex flex-wrap gap-4 h-[75%] overflow-y-auto px-5">
         {items.length > 0 ? (
-          items.map((item) => (
+          items.map((item,index) => (
             <li
               key={item._id}
               className="shadow flex flex-col justify-center items-center p-4 rounded-xl w-[15rem]"
             >
               <img
-                src="https://m.media-amazon.com/images/I/61LYRZ-uH6L._AC_UY1100_.jpg"
+                src={img[index%10]}
                 alt="img"
                 width={150}
                 height={150}
