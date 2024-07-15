@@ -21,7 +21,7 @@ const Customisation = () => {
   const handleBack = () => {
     setStep(step - 1);
   };
-  console.log(colorPalette, "colorPalette");
+
   return (
     <Modal open={open}>
       <div className="flex items-center justify-center min-h-screen">

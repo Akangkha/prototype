@@ -19,7 +19,7 @@ const SkinColorPicker = ({ onBack, onNext, setColorPalette }) => {
   };
 
   const handleSubmit = () => {
-    console.log("Selected skin color:", skinColor);
+ 
     generatePalette(skinColor, false)
       .then((res) => {
         console.log("Generated palette:", res);

@@ -1,12 +1,15 @@
 export const sendMeasurements = async (measurements) => {
   try {
-    const response = await fetch("http://127.0.0.1:5000/measurements", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(measurements),
-    });
+    const response = await fetch(
+      "https://styledforyouserver.vercel.app/measurements",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(measurements),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to send measurements to API");
@@ -21,16 +24,19 @@ export const sendMeasurements = async (measurements) => {
 
 export const generatePalette = async (skinColor, coolUndertone) => {
   try {
-    const response = await fetch("http://127.0.0.1:5000/generate_palette", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        skin_color: skinColor,
-        cool_undertone: coolUndertone,
-      }),
-    });
+    const response = await fetch(
+      "https://styledforyouserver.vercel.app/generate_palette",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          skin_color: skinColor,
+          cool_undertone: coolUndertone,
+        }),
+      }
+    );
 
     if (!response.ok) {
       throw new Error("Failed to generate palette");
