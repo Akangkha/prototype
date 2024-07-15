@@ -3,6 +3,7 @@ import { useState } from "react";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
 import Image from "next/image";
 import { sendMeasurements } from "@/api/recommendation";
+
 const BodyTypeCalculator = ({ onNext }) => {
   const [bust, setBust] = useState("");
   const [waist, setWaist] = useState("");
@@ -15,7 +16,19 @@ const BodyTypeCalculator = ({ onNext }) => {
   const [bottomWearSize, setBottomWearSize] = useState("");
 
   const handleNext = () => {
-    onNext();
+    if (
+      bust &&
+      waist &&
+      highHip &&
+      hips &&
+      bodyType &&
+      upperWearSize &&
+      bottomWearSize
+    ) {
+      onNext();
+    } else {
+      alert("Please fill in all fields to proceed.");
+    }
   };
 
   const convertToInches = (value) => (unit === "cm" ? value / 2.54 : value);
@@ -75,7 +88,7 @@ const BodyTypeCalculator = ({ onNext }) => {
     setUpperWearSize(upperWearSize);
     setBottomWearSize(bottomWearSize);
 
-     const measurements = {
+    const measurements = {
       bust: bustNum,
       waist: waistNum,
       highHip: highHipNum,
@@ -86,14 +99,6 @@ const BodyTypeCalculator = ({ onNext }) => {
     };
 
     sendMeasurements(measurements);
-  };
-
-  const calculateClothingSize = (bustNum, waistNum, hipsNum) => {
-    const upperWearSize = getUpperWearSize(bustNum);
-    const bottomWearSize = getBottomWearSize(waistNum, hipsNum);
-
-    setUpperWearSize(upperWearSize);
-    setBottomWearSize(bottomWearSize);
   };
 
   const getUpperWearSize = (bust) => {
@@ -125,9 +130,7 @@ const BodyTypeCalculator = ({ onNext }) => {
               value={unit}
               onChange={(e) => setUnit(e.target.value)}
             >
-              <option value="inches" className="border-gray-600">
-                Inches
-              </option>
+              <option value="inches">Inches</option>
               <option value="cm">Centimeters</option>
             </select>
           </label>
@@ -199,7 +202,21 @@ const BodyTypeCalculator = ({ onNext }) => {
         />
       </div>
       <ArrowCircleRightIcon
-        onClick={handleNext}
+        onClick={() => {
+          if (
+            bust &&
+            waist &&
+            highHip &&
+            hips &&
+            bodyType &&
+            upperWearSize &&
+            bottomWearSize
+          ) {
+            handleNext();
+          } else {
+            alert("Please fill in all fields to proceed.");
+          }
+        }}
         className="cursor-pointer absolute bottom-6 right-6"
         fontSize="large"
       />

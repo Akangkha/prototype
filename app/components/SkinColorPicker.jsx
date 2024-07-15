@@ -3,7 +3,8 @@ import { useState } from "react";
 import ArrowCircleLeftIcon from "@mui/icons-material/ArrowCircleLeft";
 import Image from "next/image";
 import ArrowCircleRightIcon from "@mui/icons-material/ArrowCircleRight";
-const SkinColorPicker = ({ onBack, onNext }) => {
+import { generatePalette } from "@/api/recommendation";
+const SkinColorPicker = ({ onBack, onNext, setColorPalette }) => {
   const [skinColor, setSkinColor] = useState("#FFDFC4");
   const skinTones = {
     "Very Light Skin": "#FFDFC4",
@@ -19,6 +20,14 @@ const SkinColorPicker = ({ onBack, onNext }) => {
 
   const handleSubmit = () => {
     console.log("Selected skin color:", skinColor);
+    generatePalette(skinColor, false)
+      .then((res) => {
+        console.log("Generated palette:", res);
+        setColorPalette(res);
+      })
+      .catch((err) => {
+        console.error("Failed to generate palette:", err);
+      });
   };
   const handleNext = () => {
     onNext();
