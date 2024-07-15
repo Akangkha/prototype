@@ -3,6 +3,15 @@
 ## Overview
 
 This app focuses on providing trend-centric recommendations for clothing by leveraging machine learning and artificial intelligence. The primary goal is to enhance the shopping experience by offering personalized suggestions based on the user's skin tone, body measurements, and style preferences. In its prototype phase, the app includes basic functionalities like size recommendations and color palette analysis, with plans for more advanced features in future iterations.
+![image](https://github.com/user-attachments/assets/76186f20-5c86-4171-8722-fffc772b338c)
+![image](https://github.com/user-attachments/assets/d0fdaa78-624d-4f99-883f-ee195f6c8ccb)
+![image](https://github.com/user-attachments/assets/6e18d1e3-1dff-40dd-aa88-525121a41606)
+![image](https://github.com/user-attachments/assets/16e1ad40-33a0-4ceb-8ec3-4b95e7762257)
+![image](https://github.com/user-attachments/assets/2a74abfc-a3b5-4500-a815-fb89fb87cf79)
+
+
+
+
 
 ## Features
 
